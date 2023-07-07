@@ -1,7 +1,7 @@
-import punycode from 'punycode';
 import CompositeDecorator from './helpers/CompositeDecorator';
 import MultiDecorator from './helpers/MultiDecorator';
 import stubContentBlock from './helpers/stubContentBlock';
+import { ucs2decode } from './helpers/usc2code';
 
 /**
  * Use CompositeDecorator to build decoratorRanges with ranges, components, and props
@@ -15,9 +15,9 @@ const offsetRanges = (ranges, block) => {
     const pre = block.text.substring(0, range.offset);
     const decorated = block.text.substring(range.offset, range.offset + range.length);
     // eslint-disable-next-line no-param-reassign
-    range.offset = punycode.ucs2.decode(pre).length;
+    range.offset = ucs2decode(pre).length;
     // eslint-disable-next-line no-param-reassign
-    range.length = punycode.ucs2.decode(decorated).length;
+    range.length = ucs2decode(decorated).length;
   });
   return ranges;
 };

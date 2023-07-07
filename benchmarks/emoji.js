@@ -5,8 +5,11 @@ const forEach = require('lodash/forEach');
 const min = require('lodash/min');
 const range = require('lodash/range');
 const runes = require('runes');
-const punycode = require('punycode');
 const chalk = require('chalk');
+const {
+  ucs2encode,
+  ucs2decode,
+} = require('../src/helpers/usc2code');
 
 // 20 chars
 const chars = [
@@ -91,7 +94,7 @@ const tests = [
     label: 'runes',
   },
   {
-    cb: string => punycode.ucs2.encode(punycode.ucs2.decode(string)),
+    cb: string => ucs2encode(ucs2decode(string)),
     label: 'punycode',
   },
 ];
